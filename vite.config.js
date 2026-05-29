@@ -6,4 +6,16 @@ import tailwindcss from 'tailwindcss'
 export default defineConfig({
   plugins: [react(),],
   
+   server: {
+    proxy: {
+      "/api": {
+        target: "https://servapibi.xm.com.co",
+        changeOrigin: true,
+        secure: true,
+
+        rewrite: (path) =>
+          path.replace(/^\/api/, ""),
+      },
+    },
+  },
 })
