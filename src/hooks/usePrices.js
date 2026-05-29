@@ -3,6 +3,10 @@ import { useEffect, useState } from "react";
 import { fetchHourlyData } from "../services/xmApi";
 
 export const usePrices = () => {
+
+  const [selectedDate, setSelectedDate] =
+    useState("2026-05-01");
+
   const [prices, setPrices] = useState([]);
 
   const [averagePrice, setAveragePrice] =
@@ -14,7 +18,7 @@ export const usePrices = () => {
 
   useEffect(() => {
     loadPrices();
-  }, []);
+  }, [selectedDate]);
 
   const loadPrices = async () => {
     try {
@@ -24,15 +28,18 @@ export const usePrices = () => {
 
       const body = {
         MetricId: "PrecBolsNaci",
-        StartDate: "2026-05-01",
-        EndDate: "2026-05-01",
+        StartDate: selectedDate,
+        EndDate: selectedDate,
         Entity: "Sistema",
       };
 
-      const response = await fetchHourlyData(body);
+      const response =
+        await fetchHourlyData(body);
 
       const values =
-        response.Items[0].HourlyEntities[0].Values;
+        response.Items[0]
+          .HourlyEntities[0]
+          .Values;
 
       const formattedData = Object.entries(values)
 
@@ -58,6 +65,7 @@ export const usePrices = () => {
       );
 
     } catch (err) {
+
       console.error(err);
 
       setError(
@@ -65,7 +73,9 @@ export const usePrices = () => {
       );
 
     } finally {
+
       setLoading(false);
+
     }
   };
 
@@ -74,5 +84,7 @@ export const usePrices = () => {
     averagePrice,
     loading,
     error,
+    selectedDate,
+    setSelectedDate,
   };
 };

@@ -15,38 +15,66 @@ function PricesPage() {
     averagePrice,
     loading,
     error,
+    selectedDate,
+    setSelectedDate,
   } = usePrices();
-
-  if (loading) return <Loader />;
-
-  if (error)
-    return <ErrorMessage message={error} />;
-
-  if (!prices.length) return <EmptyState />;
 
   return (
     <div>
+
       <h1 className="text-3xl font-bold mb-6">
         Panel de precios
       </h1>
 
       <div className="bg-white rounded-lg shadow p-6 mb-6">
 
-        <h2 className="text-xl font-semibold mb-2">
-          Precio promedio diario
-        </h2>
+        <label className="block mb-2 font-semibold">
+          Seleccionar fecha
+        </label>
 
-        <p className="text-3xl text-blue-600 font-bold">
-          ${averagePrice}
-        </p>
+        <input
+          type="date"
+          value={selectedDate}
+          onChange={(e) =>
+            setSelectedDate(e.target.value)
+          }
+          className="border rounded-lg px-4 py-2"
+        />
 
       </div>
 
-      <div className="bg-white rounded-lg shadow p-6">
+      {loading && <Loader />}
 
-        <PriceChart data={prices} />
+      {error && (
+        <ErrorMessage message={error} />
+      )}
 
-      </div>
+      {!loading && !error && !prices.length && (
+        <EmptyState />
+      )}
+
+      {!loading && !error && prices.length > 0 && (
+        <>
+          <div className="bg-white rounded-lg shadow p-6 mb-6">
+
+            <h2 className="text-xl font-semibold mb-2">
+              Precio promedio diario
+            </h2>
+
+            <p className="text-3xl text-blue-600 font-bold">
+              ${averagePrice}
+            </p>
+
+          </div>
+
+          <div className="bg-white rounded-lg shadow p-6">
+
+            <PriceChart data={prices} />
+
+          </div>
+        </>
+      )}
+
     </div>
   );
 }
