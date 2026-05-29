@@ -1,16 +1,101 @@
-# React + Vite
+# XM Energy Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Descripción
 
-Currently, two official plugins are available:
+XM Energy Dashboard es una aplicación web SPA desarrollada en React para visualizar y analizar métricas del sector energético colombiano utilizando la API pública de XM.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+La aplicación permite consultar información energética en tiempo real mediante gráficos interactivos y visualizaciones dinámicas enfocadas en el análisis de precios y generación eléctrica.
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Funcionalidades implementadas
 
-## Expanding the ESLint configuration
+### Panel de precios
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+* Consumo de datos horarios desde la API XM.
+* Visualización gráfica de precios horarios de energía.
+* Cálculo automático del precio promedio diario.
+* Selector dinámico de fecha.
+* Manejo de estados de carga, errores y ausencia de datos.
+
+### Panel de generación
+
+* Consumo de información de generación por recurso.
+* Transformación y agrupación de datos.
+* Visualización Top 10 de plantas despachadas mediante gráfica de barras.
+
+---
+
+## Tecnologías utilizadas
+
+* React
+* Vite
+* TailwindCSS
+* Axios
+* Recharts
+* React Router DOM
+
+---
+
+## Arquitectura del proyecto
+
+El proyecto fue estructurado utilizando una arquitectura modular separando:
+
+* Pages
+* Components
+* Hooks personalizados
+* Services para consumo de API
+* Layouts reutilizables
+
+También se implementó manejo de proxy en Vite para solucionar restricciones CORS de la API XM.
+
+---
+
+## Instalación y ejecución local
+
+### 1. Clonar repositorio
+
+```bash
+git clone URL_DEL_REPOSITORIO
+```
+
+### 2. Ingresar al proyecto
+
+```bash
+cd xm-energy-dashboard
+```
+
+### 3. Instalar dependencias
+
+```bash
+npm install
+```
+
+### 4. Ejecutar entorno local
+
+```bash
+npm run dev
+```
+
+---
+
+## Despliegue
+
+La aplicación puede desplegarse fácilmente en plataformas como:
+
+* Vercel
+* Netlify
+
+---
+
+## Consideraciones técnicas
+
+* La API XM presenta restricciones CORS para consumo directo desde frontend, por lo que se configuró un proxy utilizando Vite.
+* Se implementó manejo de errores para mejorar la experiencia del usuario ante fallos de red o ausencia de datos.
+* El diseño es responsive y adaptable a diferentes tamaños de pantalla.
+
+---
+
+## Autor
+
+Desarrollado por Laura Correa.
